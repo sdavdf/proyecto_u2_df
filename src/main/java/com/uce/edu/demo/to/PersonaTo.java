@@ -1,19 +1,29 @@
 package com.uce.edu.demo.to;
 
-public class Persona {
+public class PersonaTo {
 
 	private int id;
 	private String nombre;
 	private String apellido;
 	
+	public PersonaTo() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	
-	public Persona(int id, String nombre, String apellido) {
+	public PersonaTo(int id, String nombre, String apellido) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+	}
+
 	// SET y GET
 	public int getId() {
 		return id;

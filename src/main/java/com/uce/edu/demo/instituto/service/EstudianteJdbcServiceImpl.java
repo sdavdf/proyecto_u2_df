@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.ProyectoU2DfApplication;
 import com.uce.edu.demo.instituto.repository.IEstudianteJdbcRepository;
-import com.uce.edu.demo.instituto.to.Estudiante;
-import com.uce.edu.demo.repository.IPersonaJdbcRepository;
+import com.uce.edu.demo.instituto.repository.modelo.Estudiante;
 
 @Service
 public class EstudianteJdbcServiceImpl implements IEstudianteJdbcService{

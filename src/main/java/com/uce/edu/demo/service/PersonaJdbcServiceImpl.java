@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.ProyectoU2DfApplication;
 import com.uce.edu.demo.repository.IPersonaJdbcRepository;
-import com.uce.edu.demo.to.PersonaTo;
+import com.uce.edu.demo.repository.modelo.Persona;
 
 @Service
 public class PersonaJdbcServiceImpl implements IPersonaJdbcService{
@@ -19,13 +19,13 @@ public class PersonaJdbcServiceImpl implements IPersonaJdbcService{
 	private IPersonaJdbcRepository iPersonaJdbcRepository;
 	
 	@Override
-	public void guardar(PersonaTo persona) {
+	public void guardar(Persona persona) {
 		// TODO Auto-generated method stub
 		this.iPersonaJdbcRepository.insertar(persona);
 	}
 
 	@Override
-	public void actualizar(PersonaTo persona) {
+	public void actualizar(Persona persona) {
 		// TODO Auto-generated method stub
 		this.iPersonaJdbcRepository.actualizar(persona);
 	}
@@ -37,14 +37,14 @@ public class PersonaJdbcServiceImpl implements IPersonaJdbcService{
 	}
 
 	@Override
-	public PersonaTo buscar(int id) {
+	public Persona buscar(int id) {
 		// TODO Auto-generated method stub
 		System.out.println("Se encontro el usuario"+id);
 		return this.iPersonaJdbcRepository.buscarPorId(id);
 	}
 
 	@Override
-	public List<PersonaTo> buscarTodos() {
+	public List<Persona> buscarTodos() {
 		// TODO Auto-generated method stub
 		return this.iPersonaJdbcRepository.buscarTodos();
 	}

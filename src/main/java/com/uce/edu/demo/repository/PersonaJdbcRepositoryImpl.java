@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.to.PersonaTo;
 
 @Repository
@@ -19,22 +20,22 @@ public class PersonaJdbcRepositoryImpl implements IPersonaJdbcRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public PersonaTo buscarPorId(int id) {
+	public Persona buscarPorId(int id) {
 		// TODO Auto-generated method stub
 		return this.jdbcTemplate.queryForObject("select * from persona where id=?", new Object[] { id },
-				new BeanPropertyRowMapper<PersonaTo>(PersonaTo.class));
+				new BeanPropertyRowMapper<Persona>(Persona.class));
 		
 	}
 
 	@Override
-	public void insertar(PersonaTo persona) {
+	public void insertar(Persona persona) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("insert into persona(id, nombre, apellido) values (?,?,?)",
 				new Object[] { persona.getId(), persona.getNombre(), persona.getApellido() });
 	}
 
 	@Override
-	public void actualizar(PersonaTo persona) {
+	public void actualizar(Persona persona) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("update persona set nombre=?, apellido=? where id=?",
 				new Object[] { persona.getNombre(), persona.getApellido(), persona.getId() });
@@ -47,16 +48,16 @@ public class PersonaJdbcRepositoryImpl implements IPersonaJdbcRepository {
 	}
 
 	@Override
-	public List<PersonaTo> buscarTodos() {
+	public List<Persona> buscarTodos() {
 		// TODO Auto-generated method stub
 		return this.jdbcTemplate.query("select * from persona order by id desc", new PersonaRowMapper());
 	}
 	
-	class PersonaRowMapper implements RowMapper<PersonaTo>{
+	class PersonaRowMapper implements RowMapper<Persona>{
 
 		@Override
-		public PersonaTo mapRow(ResultSet rs, int rowNum) throws SQLException {
-			PersonaTo persona = new PersonaTo();
+		public Persona mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Persona persona = new Persona();
 			persona.setId(rs.getInt("id"));
 			persona.setNombre(rs.getString("nombre"));
 			persona.setApellido(rs.getString("apellido"));

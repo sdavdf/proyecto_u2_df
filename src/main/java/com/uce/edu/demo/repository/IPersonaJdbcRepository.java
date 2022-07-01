@@ -2,19 +2,17 @@ package com.uce.edu.demo.repository;
 
 import java.util.List;
 
-import com.uce.edu.demo.to.PersonaTo;
-
-
+import com.uce.edu.demo.repository.modelo.Persona;
 
 public interface IPersonaJdbcRepository {
 	
-	public List<PersonaTo> buscarTodos();
+	public List<Persona> buscarTodos();
 	
-	public PersonaTo buscarPorId(int id);
+	public Persona buscarPorId(int id);
 	
-	public void insertar(PersonaTo persona);
+	public void insertar(Persona persona);
 	
-	public void actualizar(PersonaTo persona);
+	public void actualizar(Persona persona);
 	
 	public void eliminar(int id);
 

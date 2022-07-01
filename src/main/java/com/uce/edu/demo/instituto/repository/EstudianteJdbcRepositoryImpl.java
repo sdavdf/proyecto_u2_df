@@ -5,7 +5,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.instituto.to.Estudiante;
+import com.uce.edu.demo.instituto.repository.modelo.Estudiante;
+import com.uce.edu.demo.instituto.to.EstudianteTo;
 
 @Repository
 public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository {
@@ -22,15 +23,15 @@ public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository {
 
 	@Override
 	public void insertar(Estudiante estudiante) {
-		this.jdbcTemplate.update("insert into estudiante (id, nombre, apellido, correoInst, edad) values (?,?,?,?,?)",
+		this.jdbcTemplate.update("insert into estudiante (id, nombre, apellido, correo, edad) values (?,?,?,?,?)",
 				new Object[] { estudiante.getId(), estudiante.getNombre(), estudiante.getApellido(),
-						estudiante.getCorreoInst(), estudiante.getEdad() });
+						estudiante.getCorreo(), estudiante.getEdad() });
 	}
 
 	@Override
 	public void actualizar(Estudiante estudiante) {
-		this.jdbcTemplate.update("update estudiante set nombre=?, apellido=?, correoInst=?, edad=? where id=?",
-				new Object[] { estudiante.getNombre(), estudiante.getApellido(), estudiante.getCorreoInst(),
+		this.jdbcTemplate.update("update estudiante set nombre=?, apellido=?, correo=?, edad=? where id=?",
+				new Object[] { estudiante.getNombre(), estudiante.getApellido(), estudiante.getCorreo(),
 						estudiante.getEdad(), estudiante.getId() });
 
 	}

@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,9 +43,20 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 //		per.setId(7);
 		per.setNombre("Pepito");
 		per.setApellido("Perez");
+		per.setCedula("0401754601");
+		per.setGenero("F");
 		
 		// GUARDAR
-		this.iPersonaJpaService.guardar(per);
+//		this.iPersonaJpaService.guardar(per);
+		
+//		Persona p = this.iPersonaJpaService.buscarPorCedula("0401754601");
+//		log.info("Se encontro ha: " +p);
+		
+		List<Persona> listp = this.iPersonaJpaService.buscarPorApellido("Perez");
+		
+		for(Persona item : listp) {
+			log.info("lista: "+ item);
+		}
 		
 		Persona per1 = new Persona();	
 //		per1.setId(13);

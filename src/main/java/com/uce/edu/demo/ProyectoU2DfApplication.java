@@ -41,10 +41,10 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 		
 		Persona per = new Persona();	
 //		per.setId(7);
-		per.setNombre("Pepito");
+		per.setNombre("Ana");
 		per.setApellido("Perez");
-		per.setCedula("0401754601");
-		per.setGenero("F");
+		per.setCedula("685664");
+		per.setGenero("M");
 		
 		// GUARDAR
 //		this.iPersonaJpaService.guardar(per);
@@ -52,16 +52,33 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 //		Persona p = this.iPersonaJpaService.buscarPorCedula("0401754601");
 //		log.info("Se encontro ha: " +p);
 		
-		List<Persona> listp = this.iPersonaJpaService.buscarPorApellido("Perez");
+//		List<Persona> listp = this.iPersonaJpaService.buscarPorApellido("Perez");
+//		
+//		for(Persona item : listp) {
+//			log.info("lista: "+ item);
+//		}
 		
-		for(Persona item : listp) {
+		
+		//Buscar por Genero
+		
+		List<Persona> listGen = this.iPersonaJpaService.buscarPorGenero("M");
+		
+		for(Persona item : listGen) {
 			log.info("lista: "+ item);
 		}
 		
-		Persona per1 = new Persona();	
-//		per1.setId(13);
-		per1.setNombre("AndreaA");
-		per1.setApellido("SolisA");
+		//Buscar por Nombre
+		
+		List<Persona> listNom = this.iPersonaJpaService.buscarPorNombre("Pepito");
+		
+		for(Persona item : listNom) {
+			log.info("lista: "+ item);
+		}
+		
+		
+		
+		
+		
 		
 		// ACTUALIZAR
 //		this.iPersonaJpaService.actualizar(per1);

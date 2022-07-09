@@ -41,60 +41,31 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 		
 		Persona per = new Persona();	
 //		per.setId(7);
-		per.setNombre("Ana");
-		per.setApellido("Perez");
-		per.setCedula("685664");
-		per.setGenero("M");
+		per.setNombre("Andrea");
+		per.setApellido("Muñoz");
+		per.setCedula("213233");
+		per.setGenero("F");
+		
+		this.iPersonaJpaService.guardar(per);
+		
+		Persona per1 = new Persona();	
+//		per.setId(7);
+		per1.setNombre("Edgardo");
+		per1.setApellido("Castillo");
+		per1.setCedula("65732420");
+		per1.setGenero("M");
 		
 		// GUARDAR
-//		this.iPersonaJpaService.guardar(per);
-		
-//		Persona p = this.iPersonaJpaService.buscarPorCedula("0401754601");
-//		log.info("Se encontro ha: " +p);
-		
-//		List<Persona> listp = this.iPersonaJpaService.buscarPorApellido("Perez");
-//		
-//		for(Persona item : listp) {
-//			log.info("lista: "+ item);
-//		}
+//		this.iPersonaJpaService.guardar(per1);
 		
 		
-		//Buscar por Genero
+		//Actualizar con JPQL
 		
-		List<Persona> listGen = this.iPersonaJpaService.buscarPorGenero("M");
+		//int resultado = this.iPersonaJpaService.actualizarPorApellido("FE", "Perez");
+		//log.info("Cantidad de registros: " + resultado);
 		
-		for(Persona item : listGen) {
-			log.info("lista: "+ item);
-		}
-		
-		//Buscar por Nombre
-		
-		List<Persona> listNom = this.iPersonaJpaService.buscarPorNombre("Pepito");
-		
-		for(Persona item : listNom) {
-			log.info("lista: "+ item);
-		}
-		
-		
-		
-		
-		
-		
-		// ACTUALIZAR
-//		this.iPersonaJpaService.actualizar(per1);
-		
-		// ELIMINAR
-//		this.iPersonaJpaService.eliminar(13);
-		
-		//Actualizar
-//		this.iPersonaJdbcService.actualizar(persona);
-//		this.iPersonaJdbcService.guardar(per1);
-//		this.iPersonaJdbcService.eliminar(12);
-//		this.iPersonaJdbcService.buscar(13);
-//		iPersonaJdbcService.guardar(per1);
-		
-		
-//		log.info(this.iPersonaJdbcService.buscarTodos());
+		int resultado1 = this.iPersonaJpaService.eliminarPorGenero("M");
+		log.info("Cantidad de eliminados: " + resultado1);
 		
 	}
 

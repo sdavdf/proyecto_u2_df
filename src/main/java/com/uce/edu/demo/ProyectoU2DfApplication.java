@@ -1,6 +1,7 @@
 package com.uce.edu.demo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,6 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 	private IPersonaJpaService iPersonaJpaService;
 	
 
-	@Autowired
-	private IVehiculoJpaService iVehiculoJpaService;
-	
-	@Autowired
-	private IMatriculaJpaService iMatriculaJpaService;
-	
-	@Autowired
-	private IPropietarioJpaService iPropietarioJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DfApplication.class, args);
@@ -47,24 +40,48 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 		// BUSCAR
 //		log.info("Dato con jpa: " + this.iPersonaJpaService.buscar(13));
 		
-//		Persona per = new Persona();	
+		Persona per = new Persona();	
 //		per.setId(7);
-//		per.setNombre("Andrea");
-//		per.setApellido("Muñoz");
-//		per.setCedula("213233");
-//		per.setGenero("F");
+		per.setNombre("Andrea");
+		per.setApellido("Muñoz");
+		per.setCedula("213233");
+		per.setGenero("F");
 		
 //		this.iPersonaJpaService.guardar(per);
 		
-//		Persona per1 = new Persona();	
+		Persona per1 = new Persona();	
 //		per.setId(7);
-//		per1.setNombre("Edgardo");
-//		per1.setApellido("Castillo");
-//		per1.setCedula("65732420");
-//		per1.setGenero("M");
-//		
+		per1.setNombre("Edgardo");
+		per1.setApellido("Castillo");
+		per1.setCedula("3244222");
+		per1.setGenero("M");
+		
 		// GUARDAR
 //		this.iPersonaJpaService.guardar(per1);
+		
+
+		//1 TypedQuery
+		Persona perTyped = this.iPersonaJpaService.buscarPorCedulaTyped("15323211");
+		log.info("Persona Typed: " + perTyped);
+		
+		//2 NamedQuery
+		Persona perNamed = this.iPersonaJpaService.buscarPorCedulaNamed("15323211");
+		log.info("Persona Named: " + perNamed);
+		
+		//3 TypedQuery y NamedQuery
+		Persona perTypedNamed = this.iPersonaJpaService.buscarPorCedulaTypedNamed("15323211");
+		log.info("Persona TypedNamed: " + perTypedNamed);
+//		
+		//4 Varios NamedQuery
+		List<Persona> listaPersona = this.iPersonaJpaService.buscarPorNombreApellido("Edgardo", "Castillo");
+		
+		for(Persona item: listaPersona) {
+			log.info("Persona: " + item);
+		}
+		
+		
+		
+		
 		
 		
 		//Actualizar con JPQL
@@ -75,25 +92,7 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 //		int resultado1 = this.iPersonaJpaService.eliminarPorGenero("M");
 //		log.info("Cantidad de eliminados: " + resultado1);
 		
-		Vehiculo v = new Vehiculo();
-		v.setMarca("Hyundai");
-		v.setModelo("2019");
-		v.setPlaca("FDG-231");
-		v.setTipo("L");
-		v.setPrecio(new BigDecimal(2300));
-		
-		//Insertar Vehiculo a la base de datos
-		//this.iVehiculoJpaService.insertar(v);
-		
-		Propietario p = new Propietario();
-		p.setNombre("Stalyn");
-		p.setApellido("Gallardo");
-		p.setCedula("034025656");
-		
-		//Insertar Propietario a la base de datos
-		this.iPropietarioJpaService.insertar(p);
-		
-		//En la matricula como ya se había dicho da error 
+
 		
 		
 	}

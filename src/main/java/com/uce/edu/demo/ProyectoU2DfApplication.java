@@ -40,41 +40,41 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 			
-		Estudiante est = new Estudiante();
-		est.setNombre("Fernanda");
-		est.setApellido("Espinoza");
-		est.setCorreo("fespinoza@XX.uce.edu.ec");
-		est.setEdad(22);
-		est.setCedula("87321110");
-		
-//		this.estudianteJpaService.insertar(est);
-		
-		//1 TypedQuery
-		Estudiante estTyped1 = this.estudianteJpaService.buscarPorCorreoTyped("fespinoza@XX.uce.edu.ec");
-		log.info("Estudiante Typed 1: " + estTyped1);
-		
-		List<Estudiante> estTyped2 = this.estudianteJpaService.buscarPorEdadTyped(22);
-		for(Estudiante item: estTyped2) {
-			log.info("Estudiante Typed 2: " + estTyped2);
-		}
-		
-		//2 NamedQuery
-		List<Estudiante> estNamed1 = this.estudianteJpaService.buscarPorNombrenamed("Fernanda");
-		for(Estudiante item: estNamed1) {
-			log.info("Estudiante Named 1: " + estNamed1);
-		}
-		
-		List<Estudiante> estNamed2 = this.estudianteJpaService.buscarPorApellidoNamed("Garcia");
-		for(Estudiante item: estNamed2) {
-			log.info("Estudiante Named 2: " + estNamed2);
-		}
-		
-		//3 TypedQuery y NamedQuery
-		Estudiante estTypedNamed1 = this.estudianteJpaService.buscarPorApellidoCedula("Bolaños", "54675875");
-		log.info("Estudiante Typed y Named 1: " + estTypedNamed1);
-		
-		Estudiante estTypedNamed2 = this.estudianteJpaService.buscarPorCorreoEdad("agarcia@XX.uce.edu.ec", 24);
-		log.info("Estudiante Typed y Named 2: " + estTypedNamed2);
+//		Estudiante est = new Estudiante();
+//		est.setNombre("Fernanda");
+//		est.setApellido("Espinoza");
+//		est.setCorreo("fespinoza@XX.uce.edu.ec");
+//		est.setEdad(22);
+//		est.setCedula("87321110");
+//		
+////		this.estudianteJpaService.insertar(est);
+//		
+//		//1 TypedQuery
+//		Estudiante estTyped1 = this.estudianteJpaService.buscarPorCorreoTyped("fespinoza@XX.uce.edu.ec");
+//		log.info("Estudiante Typed 1: " + estTyped1);
+//		
+//		List<Estudiante> estTyped2 = this.estudianteJpaService.buscarPorEdadTyped(22);
+//		for(Estudiante item: estTyped2) {
+//			log.info("Estudiante Typed 2: " + estTyped2);
+//		}
+//		
+//		//2 NamedQuery
+//		List<Estudiante> estNamed1 = this.estudianteJpaService.buscarPorNombrenamed("Fernanda");
+//		for(Estudiante item: estNamed1) {
+//			log.info("Estudiante Named 1: " + estNamed1);
+//		}
+//		
+//		List<Estudiante> estNamed2 = this.estudianteJpaService.buscarPorApellidoNamed("Garcia");
+//		for(Estudiante item: estNamed2) {
+//			log.info("Estudiante Named 2: " + estNamed2);
+//		}
+//		
+//		//3 TypedQuery y NamedQuery
+//		Estudiante estTypedNamed1 = this.estudianteJpaService.buscarPorApellidoCedula("Bolaños", "54675875");
+//		log.info("Estudiante Typed y Named 1: " + estTypedNamed1);
+//		
+//		Estudiante estTypedNamed2 = this.estudianteJpaService.buscarPorCorreoEdad("agarcia@XX.uce.edu.ec", 24);
+//		log.info("Estudiante Typed y Named 2: " + estTypedNamed2);
 		
 		
 		
@@ -102,6 +102,18 @@ public class ProyectoU2DfApplication implements CommandLineRunner{
 		
 		// GUARDAR
 //		this.iPersonaJpaService.guardar(per1);
+		
+		Persona perNative = this.iPersonaJpaService.buscarPorCedulaNative("15323211");
+		log.info("Persona Native: " + perNative);
+		
+		Persona perNamedNative = this.iPersonaJpaService.buscarPorCedulaNamedNative("15323211");
+		log.info("Persona Named y Native: " + perNamedNative);
+		
+		
+		
+		
+		
+		
 		
 
 //		//1 TypedQuery

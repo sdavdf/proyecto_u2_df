@@ -88,4 +88,36 @@ public class EstudianteJpaRepositoryIml implements IEstudianteJpaRepository{
 		return myQuery.getSingleResult();
 	}
 
+	@Override
+	public List<Estudiante> buscarPorApellidoNative(String apellido) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE apellido = :datoApellido", Estudiante.class);
+		myQuery.setParameter("datoApellido", apellido);
+		return (List<Estudiante>) myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreNative(String nombre) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE nombre = :datoNombre", Estudiante.class);
+		myQuery.setParameter("datoNombre", nombre);
+		return (List<Estudiante>) myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorEdadNamedNative(Integer edad) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery  = this.entityManager.createNamedQuery("Estudiante.buscarPorEdadNative", Estudiante.class);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarPorCorreoNamedNative(String correo) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery  = this.entityManager.createNamedQuery("Estudiante.buscarPorCorreoNative", Estudiante.class);
+		myQuery.setParameter("datoCorreo", correo);
+		return myQuery.getSingleResult();
+	}
+
 }

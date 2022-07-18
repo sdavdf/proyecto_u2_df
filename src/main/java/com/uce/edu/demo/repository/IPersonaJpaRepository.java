@@ -28,6 +28,10 @@ public interface IPersonaJpaRepository {
 	
 	public Persona buscarPorCedulaTypedNamed(String cedula);
 	
+	public Persona buscarDinamicamente(String nombre, String apellido, String genero);
+	
+//	public Persona buscarDinamicamentePredicado(String nombre, String apellido, String genero);
+	
 	public Persona buscarPorId(Integer id);
 	
 	public void insertar(Persona persona);

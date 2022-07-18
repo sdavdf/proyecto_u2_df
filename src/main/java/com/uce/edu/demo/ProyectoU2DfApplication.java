@@ -1,23 +1,22 @@
 package com.uce.edu.demo;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.instituto.repository.modelo.Estudiante;
 import com.uce.edu.demo.instituto.service.IEstudianteJpaService;
+import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
 
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
-//	@Autowired
-//	private IPersonaJpaService iPersonaJpaService;
+	@Autowired
+	private IPersonaJpaService iPersonaJpaService;
 
 	@Autowired
 	private IEstudianteJpaService estudianteJpaService;
@@ -32,25 +31,56 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 		
 		
 		
+		Persona criteriaApi = this.iPersonaJpaService.buscarPorCedulaCriteriaApi("15323211");
+		log.info("Persona Cristeria API: " + criteriaApi);
+		
+		Persona perDinamica = this.iPersonaJpaService.buscarDinamicamente("Diana", "Ortiz", "F");
+		log.info("Persona Dinamica: " + perDinamica);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// NativeQuery
-		List<Estudiante> estNative1 = this.estudianteJpaService.buscarPorNombreNative("Fernanda");
-		for(Estudiante item: estNative1) {
-			log.info("Estudiante Native 1: " + item);
-		}
+//		List<Estudiante> estNative1 = this.estudianteJpaService.buscarPorNombreNative("Fernanda");
+//		for(Estudiante item: estNative1) {
+//			log.info("Estudiante Native 1: " + item);
+//		}
+//		
+//		List<Estudiante> estNative2 = this.estudianteJpaService.buscarPorApellidoNative("Bolaños");
+//		for(Estudiante item: estNative2) {
+//			log.info("Estudiante Native 2: " + item);
+//		}
+//
+//		// NativeNamedQuery
+//		List<Estudiante> estNativeNamed1 = this.estudianteJpaService.buscarPorEdadNamedNative(22);
+//		for(Estudiante item: estNativeNamed1) {
+//			log.info("Estudiante Native Named 1: " + item);
+//		}
+//		
+//		Estudiante estNativeNamed2 = this.estudianteJpaService.buscarPorCorreoNamedNative("fespinoza@XX.uce.edu.ec");
+//		log.info("Estudiante Native Named 2: " + estNativeNamed2);
 		
-		List<Estudiante> estNative2 = this.estudianteJpaService.buscarPorApellidoNative("Bolaños");
-		for(Estudiante item: estNative2) {
-			log.info("Estudiante Native 2: " + item);
-		}
-
-		// NativeNamedQuery
-		List<Estudiante> estNativeNamed1 = this.estudianteJpaService.buscarPorEdadNamedNative(22);
-		for(Estudiante item: estNativeNamed1) {
-			log.info("Estudiante Native Named 1: " + item);
-		}
-		
-		Estudiante estNativeNamed2 = this.estudianteJpaService.buscarPorCorreoNamedNative("fespinoza@XX.uce.edu.ec");
-		log.info("Estudiante Native Named 2: " + estNativeNamed2);
+	
 		
 		
 
@@ -66,12 +96,12 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 
 //		this.iPersonaJpaService.guardar(per);
 
-//		Persona per1 = new Persona();
-////		per.setId(7);
-//		per1.setNombre("Edgardo");
-//		per1.setApellido("Castillo");
-//		per1.setCedula("3244222");
-//		per1.setGenero("M");
+		Persona per1 = new Persona();
+//		per.setId(7);
+		per1.setNombre("Diana");
+		per1.setApellido("Ortiz");
+		per1.setCedula("3656457");
+		per1.setGenero("F");
 
 		// GUARDAR
 //		this.iPersonaJpaService.guardar(per1);

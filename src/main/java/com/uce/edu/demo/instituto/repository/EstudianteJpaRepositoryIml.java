@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -118,6 +122,58 @@ public class EstudianteJpaRepositoryIml implements IEstudianteJpaRepository{
 		TypedQuery<Estudiante> myQuery  = this.entityManager.createNamedQuery("Estudiante.buscarPorCorreoNative", Estudiante.class);
 		myQuery.setParameter("datoCorreo", correo);
 		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarDinamicamenteNombre(String cedula, String nombre, Integer edad) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myQuery = myCriteria.createQuery(Estudiante.class);
+		
+		Root<Estudiante> myTabla = myQuery.from(Estudiante.class);
+		
+		Predicate predicadoCedula = myCriteria.equal(myTabla.get("cedula"), cedula);
+		Predicate predicadoEdad = myCriteria.equal(myTabla.get("edad"), edad);
+		
+		
+		Predicate myPredicadoFinal = null;
+		
+		if(nombre.equals("Fernanda")) {
+			myPredicadoFinal = myCriteria.and(predicadoCedula, predicadoEdad);
+		}else {
+			myPredicadoFinal = myCriteria.or(predicadoCedula, predicadoEdad);
+		}
+		
+		myQuery.select(myTabla).where(myPredicadoFinal);
+		
+		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
+		return myQueryFinal.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarDinamicamenteCorreo(Integer edad, String apellido, String correo) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myQuery = myCriteria.createQuery(Estudiante.class);
+		
+		Root<Estudiante> myTabla = myQuery.from(Estudiante.class);
+		
+		Predicate predicadoEdad = myCriteria.equal(myTabla.get("edad"), edad);
+		Predicate predicadoApellido = myCriteria.equal(myTabla.get("apellido"), apellido);
+		
+		
+		Predicate myPredicadoFinal = null;
+		
+		if(correo.equals("agarcia@XX.uce.edu.ec")) {
+			myPredicadoFinal = myCriteria.and(predicadoEdad, predicadoApellido);
+		}else {
+			myPredicadoFinal = myCriteria.or(predicadoEdad, predicadoApellido);
+		}
+		
+		myQuery.select(myTabla).where(myPredicadoFinal);
+		
+		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
+		return myQueryFinal.getResultList();
 	}
 
 }

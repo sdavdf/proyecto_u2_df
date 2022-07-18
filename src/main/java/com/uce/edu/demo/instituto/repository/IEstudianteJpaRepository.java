@@ -3,7 +3,6 @@ package com.uce.edu.demo.instituto.repository;
 import java.util.List;
 
 import com.uce.edu.demo.instituto.repository.modelo.Estudiante;
-import com.uce.edu.demo.repository.modelo.Persona;
 
 public interface IEstudianteJpaRepository {
 	
@@ -28,6 +27,10 @@ public interface IEstudianteJpaRepository {
 	public List<Estudiante> buscarPorEdadNamedNative(Integer edad);
 	
 	public Estudiante buscarPorCorreoNamedNative(String correo);
+	
+	public List<Estudiante> buscarDinamicamenteNombre(String cedula, String nombre, Integer edad);
+	
+	public List<Estudiante> buscarDinamicamenteCorreo(Integer edad, String apellido, String correo);
 	
 	public void insertar(Estudiante estudiante);
 	

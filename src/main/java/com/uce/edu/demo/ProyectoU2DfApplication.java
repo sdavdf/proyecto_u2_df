@@ -8,10 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.demo.instituto.repository.modelo.EstudianteBuscar;
+import com.uce.edu.demo.instituto.repository.modelo.EstudianteConteoNombre;
 import com.uce.edu.demo.instituto.service.IEstudianteJpaService;
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
-import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
@@ -33,20 +32,34 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
+		
+		//Ejemplo 1
+		List<EstudianteBuscar> listaEstudiante = this.estudianteJpaService.buscarPorNombreEdad("Ana", 22);
+		
+		for(EstudianteBuscar estItem: listaEstudiante) {
+			log.info("Estudiante Buscar: " + estItem);
+		}
+		
+		//Ejemplo 2
+		List<EstudianteConteoNombre> listaEstudianteConteo = this.estudianteJpaService.buscarNombreConteo();
+		
+		for(EstudianteConteoNombre estItem: listaEstudianteConteo) {
+			log.info("Estudiante Conteo: " + estItem);
+		}
 
-				
-	
-		List<PersonaSencilla> listaPersona = this.iPersonaJpaService.buscarPorApellidoSencillo("Perez");
 		
-		for(PersonaSencilla perItem: listaPersona) {
-			log.info("Persona: " + perItem);
-		}
-		
-		List<PersonaContadorGenero> listaPersonaContador = this.iPersonaJpaService.consultarCantidadPorGenero();
-		
-		for(PersonaContadorGenero perItem: listaPersonaContador) {
-			log.info("Persona Contador: " + perItem);
-		}
+
+//		List<PersonaSencilla> listaPersona = this.iPersonaJpaService.buscarPorApellidoSencillo("Perez");
+//		
+//		for(PersonaSencilla perItem: listaPersona) {
+//			log.info("Persona: " + perItem);
+//		}
+//		
+//		List<PersonaContadorGenero> listaPersonaContador = this.iPersonaJpaService.consultarCantidadPorGenero();
+//		
+//		for(PersonaContadorGenero perItem: listaPersonaContador) {
+//			log.info("Persona Contador: " + perItem);
+//		}
 		
 //		Persona criteriaApi = this.iPersonaJpaService.buscarPorCedulaCriteriaApi("15323211");
 //		log.info("Persona Cristeria API: " + criteriaApi);

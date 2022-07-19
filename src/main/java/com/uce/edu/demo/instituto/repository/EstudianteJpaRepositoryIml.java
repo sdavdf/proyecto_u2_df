@@ -15,7 +15,11 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.instituto.repository.modelo.Estudiante;
+import com.uce.edu.demo.instituto.repository.modelo.EstudianteBuscar;
+import com.uce.edu.demo.instituto.repository.modelo.EstudianteConteoNombre;
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 
 @Repository
 @Transactional
@@ -174,6 +178,26 @@ public class EstudianteJpaRepositoryIml implements IEstudianteJpaRepository{
 		
 		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
 		return myQueryFinal.getResultList();
+	}
+
+	@Override
+	public List<EstudianteBuscar> buscarPorNombreEdad(String nombre, Integer edad) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteBuscar> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.instituto.repository.modelo.EstudianteBuscar(p.nombre, p.edad) FROM Estudiante p WHERE p.nombre = :datoNombre OR p.edad = :datoEdad",
+				EstudianteBuscar.class);
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoEdad", edad);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteConteoNombre> buscarNombreConteo() {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteConteoNombre> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.instituto.repository.modelo.EstudianteConteoNombre(p.nombre, COUNT(p.nombre)) FROM Estudiante p GROUP BY p.nombre",
+				EstudianteConteoNombre.class);
+		return myQuery.getResultList();
 	}
 
 }

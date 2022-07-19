@@ -8,9 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.instituto.repository.modelo.Estudiante;
 import com.uce.edu.demo.instituto.service.IEstudianteJpaService;
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
@@ -33,33 +34,19 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 		// TODO Auto-generated method stub
 		
 
-		//1 Criteria API
-		List<Estudiante> estDinamica1 = this.estudianteJpaService.buscarDinamicamenteNombre("8732111", "Lucia", 22);
-		for(Estudiante item: estDinamica1) {
-			log.info("Estudiante Dinamico 1: " + item);
+				
+	
+		List<PersonaSencilla> listaPersona = this.iPersonaJpaService.buscarPorApellidoSencillo("Perez");
+		
+		for(PersonaSencilla perItem: listaPersona) {
+			log.info("Persona: " + perItem);
 		}
 		
-		//2 Criteria API
-		List<Estudiante> estDinamica2 = this.estudianteJpaService.buscarDinamicamenteCorreo(24, "Garcia", "agarcia@XX.uce.edu.ec");
-		for(Estudiante item: estDinamica2) {
-			log.info("Estudiante Dinamico 2: " + item);
+		List<PersonaContadorGenero> listaPersonaContador = this.iPersonaJpaService.consultarCantidadPorGenero();
+		
+		for(PersonaContadorGenero perItem: listaPersonaContador) {
+			log.info("Persona Contador: " + perItem);
 		}
-		
-		
-		
-//		Estudiante s = new Estudiante();
-//		s.setNombre("Fernanda");
-//		s.setApellido("Aguilar");
-//		s.setCedula("34364");
-//		s.setCorreo("faguilar@XX.uce.edu.ec");
-//		s.setEdad(22);
-//		
-//		this.estudianteJpaService.insertar(s);
-		
-		
-		
-		
-		
 		
 //		Persona criteriaApi = this.iPersonaJpaService.buscarPorCedulaCriteriaApi("15323211");
 //		log.info("Persona Cristeria API: " + criteriaApi);
@@ -74,11 +61,11 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 
 //		Persona per = new Persona();
 ////		per.setId(7);
-//		per.setNombre("Andrea");
-//		per.setApellido("Muñoz");
-//		per.setCedula("213233");
+//		per.setNombre("Sofia");
+//		per.setApellido("Cruz");
+//		per.setCedula("756879");
 //		per.setGenero("F");
-
+//
 //		this.iPersonaJpaService.guardar(per);
 
 //		Persona per1 = new Persona();

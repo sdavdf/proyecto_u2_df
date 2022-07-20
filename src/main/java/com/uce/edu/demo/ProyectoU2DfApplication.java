@@ -1,6 +1,6 @@
 package com.uce.edu.demo;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.instituto.repository.modelo.EstudianteBuscar;
-import com.uce.edu.demo.instituto.repository.modelo.EstudianteConteoNombre;
-import com.uce.edu.demo.instituto.service.IEstudianteJpaService;
-import com.uce.edu.demo.service.IPersonaJpaService;
+import com.uce.edu.demo.repository.modelo.Ciudadano;
+import com.uce.edu.demo.repository.modelo.Empleado;
+import com.uce.edu.demo.service.ICiudadanoService;
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
@@ -19,10 +18,13 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
-
-	@Autowired
-	private IEstudianteJpaService estudianteJpaService;
+	private ICiudadanoService ciudadanoService;
+	
+//	@Autowired
+//	private IPersonaJpaService iPersonaJpaService;
+//
+//	@Autowired
+//	private IEstudianteJpaService estudianteJpaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2DfApplication.class, args);
@@ -33,19 +35,34 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 		// TODO Auto-generated method stub
 		
 		
-		//Ejemplo 1
-		List<EstudianteBuscar> listaEstudiante = this.estudianteJpaService.buscarPorNombreEdad("Ana", 22);
+		Ciudadano ciu1 = new Ciudadano();
+		ciu1.setNombre("David");
+		ciu1.setApellido("Cayambe");
 		
-		for(EstudianteBuscar estItem: listaEstudiante) {
-			log.info("Estudiante Buscar: " + estItem);
-		}
+		Empleado empl1 = new Empleado();
+		empl1.setCodigoIess("53453");
+		empl1.setSalario(new BigDecimal(50));
+		empl1.setCiudadano(ciu1);
 		
-		//Ejemplo 2
-		List<EstudianteConteoNombre> listaEstudianteConteo = this.estudianteJpaService.buscarNombreConteo();
+		ciu1.setEmpleado(empl1);
 		
-		for(EstudianteConteoNombre estItem: listaEstudianteConteo) {
-			log.info("Estudiante Conteo: " + estItem);
-		}
+		
+		this.ciudadanoService.guardar(ciu1);
+		
+		
+//		//Ejemplo 1
+//		List<EstudianteBuscar> listaEstudiante = this.estudianteJpaService.buscarPorNombreEdad("Ana", 22);
+//		
+//		for(EstudianteBuscar estItem: listaEstudiante) {
+//			log.info("Estudiante Buscar: " + estItem);
+//		}
+//		
+//		//Ejemplo 2
+//		List<EstudianteConteoNombre> listaEstudianteConteo = this.estudianteJpaService.buscarNombreConteo();
+//		
+//		for(EstudianteConteoNombre estItem: listaEstudianteConteo) {
+//			log.info("Estudiante Conteo: " + estItem);
+//		}
 
 		
 

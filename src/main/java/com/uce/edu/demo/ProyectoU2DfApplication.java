@@ -1,6 +1,6 @@
 package com.uce.edu.demo;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +8,22 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Ciudadano;
-import com.uce.edu.demo.repository.modelo.Empleado;
-import com.uce.edu.demo.service.ICiudadanoService;
+import com.uce.edu.demo.registro.repository.modelo.CiudadanoTurista;
+import com.uce.edu.demo.registro.repository.modelo.Pasaporte;
+import com.uce.edu.demo.registro.service.ICiudadanoTuristaService;
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
 
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
+	
 	@Autowired
-	private ICiudadanoService ciudadanoService;
+	private ICiudadanoTuristaService ciudadanoTuristaService;
+	
+	
+//	@Autowired
+//	private ICiudadanoService ciudadanoService;
 	
 //	@Autowired
 //	private IPersonaJpaService iPersonaJpaService;
@@ -34,20 +39,89 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
+
+		//Ciudadadano 1
+		CiudadanoTurista ct1 = new CiudadanoTurista();
+		ct1.setNombre("Angelica");
+		ct1.setApellido("Ruiz");
+		ct1.setCedula("3240324032");
+		ct1.setFechaNacimiento(LocalDateTime.of(1999, 3, 15, 0, 0));
 		
-		Ciudadano ciu1 = new Ciudadano();
-		ciu1.setNombre("David");
-		ciu1.setApellido("Cayambe");
-		
-		Empleado empl1 = new Empleado();
-		empl1.setCodigoIess("53453");
-		empl1.setSalario(new BigDecimal(50));
-		empl1.setCiudadano(ciu1);
-		
-		ciu1.setEmpleado(empl1);
+		//Pasaporte 1
+		Pasaporte p1 = new Pasaporte();
+		p1.setCiudadanoTurista(ct1);
+		p1.setNumero("5465");
+		p1.setFechaEmision(LocalDateTime.of(2014, 2, 1, 0, 0));
+		p1.setFechaCaducidad(LocalDateTime.of(2022, 3, 1, 0, 0));
 		
 		
-		this.ciudadanoService.guardar(ciu1);
+		//Ciudadadano 2
+		CiudadanoTurista ct2 = new CiudadanoTurista();
+		ct2.setNombre("Stiven");
+		ct2.setApellido("Villegas");
+		ct2.setCedula("5343567");
+		ct2.setFechaNacimiento(LocalDateTime.of(1999, 3, 5, 0, 0));
+		
+		//Pasaporte 2
+		Pasaporte p2 = new Pasaporte();
+		p2.setCiudadanoTurista(ct2);
+		p2.setNumero("1234");
+		p2.setFechaEmision(LocalDateTime.of(2016, 4, 6, 0, 0));
+		p2.setFechaCaducidad(LocalDateTime.of(2020, 3, 6, 0, 0));
+		
+		
+		
+		//Ciudadadano 3
+		CiudadanoTurista ct3 = new CiudadanoTurista();
+		ct2.setNombre("Lucia");
+		ct2.setApellido("Vasconez");
+		ct2.setCedula("534347");
+		ct2.setFechaNacimiento(LocalDateTime.of(1999, 4, 5, 0, 0));
+				
+		//Pasaporte 2
+		Pasaporte p3 = new Pasaporte();
+		p3.setCiudadanoTurista(ct3);
+		p3.setNumero("46575");
+		p3.setFechaEmision(LocalDateTime.of(2017, 4, 6, 0, 0));
+		p3.setFechaCaducidad(LocalDateTime.of(2019, 3, 6, 0, 0));
+		
+		//Insertar
+//		this.ciudadanoTuristaService.insertar(ct3);
+	
+			
+//		//Buscar
+//		this.ciudadanoTuristaService.buscar(1);
+//				
+//		//Actualizar
+//				
+//		ct3.setApellido("Rodriguez");
+//		this.ciudadanoTuristaService.actualizar(ct3);
+//		
+//		
+//		//Eliminar
+		this.ciudadanoTuristaService.eliminar(3);
+		
+		
+		
+		
+		
+//		Ciudadano ciu1 = new Ciudadano();
+//		ciu1.setNombre("David");
+//		ciu1.setApellido("Cayambe");
+//		
+//		Empleado empl1 = new Empleado();
+//		empl1.setCodigoIess("53453");
+//		empl1.setSalario(new BigDecimal(50));
+//		empl1.setCiudadano(ciu1);
+//		
+//		ciu1.setEmpleado(empl1);
+//		
+//		
+//		this.ciudadanoService.guardar(ciu1);
+		
+		
+		
+		
 		
 		
 //		//Ejemplo 1
@@ -117,39 +191,6 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 //		log.info("Persona Named y Native: " + perNamedNative);
 
 		// Criteria API Query
-
-
-		
-	
-		
-		
-//		//1 TypedQuery
-//		Persona perTyped = this.iPersonaJpaService.buscarPorCedulaTyped("15323211");
-//		log.info("Persona Typed: " + perTyped);
-//		
-//		//2 NamedQuery
-//		Persona perNamed = this.iPersonaJpaService.buscarPorCedulaNamed("15323211");
-//		log.info("Persona Named: " + perNamed);
-//		
-//		//3 TypedQuery y NamedQuery
-//		Persona perTypedNamed = this.iPersonaJpaService.buscarPorCedulaTypedNamed("15323211");
-//		log.info("Persona TypedNamed: " + perTypedNamed);
-////		
-//		//4 Varios NamedQuery
-//		List<Persona> listaPersona = this.iPersonaJpaService.buscarPorNombreApellido("Edgardo", "Castillo");
-//		
-//		for(Persona item: listaPersona) {
-//			log.info("Persona: " + item);
-//		}
-
-		// Actualizar con JPQL
-
-		// int resultado = this.iPersonaJpaService.actualizarPorApellido("FE", "Perez");
-		// log.info("Cantidad de registros: " + resultado);
-
-//		int resultado1 = this.iPersonaJpaService.eliminarPorGenero("M");
-//		log.info("Cantidad de eliminados: " + resultado1);
-
 	}
 
 }

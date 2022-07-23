@@ -1,25 +1,30 @@
 package com.uce.edu.demo;
 
-import java.time.LocalDateTime;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.registro.repository.modelo.CiudadanoTurista;
-import com.uce.edu.demo.registro.repository.modelo.Pasaporte;
 import com.uce.edu.demo.registro.service.ICiudadanoTuristaService;
+import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
+import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
+import com.uce.edu.demo.service.IHabitacionService;
+import com.uce.edu.demo.service.IHotelService;
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
 
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
+	@Autowired
+	private IHabitacionService habitacionService;
 	
 	@Autowired
-	private ICiudadanoTuristaService ciudadanoTuristaService;
+	private IHotelService hotelService;
+	
+//	@Autowired
+//	private ICiudadanoTuristaService ciudadanoTuristaService;
 	
 	
 //	@Autowired
@@ -40,50 +45,29 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 		// TODO Auto-generated method stub
 		
 
-		//Ciudadadano 1
-		CiudadanoTurista ct1 = new CiudadanoTurista();
-		ct1.setNombre("Angelica");
-		ct1.setApellido("Ruiz");
-		ct1.setCedula("3240324032");
-		ct1.setFechaNacimiento(LocalDateTime.of(1999, 3, 15, 0, 0));
+//		Hotel h1 = new Hotel();
+//		h1.setNombre("Hilton Colon");
+//		h1.setDireccion("Av.Patria");
+//		
+//		this.hotelService.insertar(h1);
 		
-		//Pasaporte 1
-		Pasaporte p1 = new Pasaporte();
-		p1.setCiudadanoTurista(ct1);
-		p1.setNumero("5465");
-		p1.setFechaEmision(LocalDateTime.of(2014, 2, 1, 0, 0));
-		p1.setFechaCaducidad(LocalDateTime.of(2022, 3, 1, 0, 0));
+		Hotel hote = new Hotel();
+		hote.setId(1);
 		
+		Habitacion habi1 = new Habitacion();
+		habi1.setNumero("A234");
+		habi1.setPiso("10");
+		habi1.setTipo("Familiar");
+		habi1.setHotel(hote);
 		
-		//Ciudadadano 2
-		CiudadanoTurista ct2 = new CiudadanoTurista();
-		ct2.setNombre("Stiven");
-		ct2.setApellido("Villegas");
-		ct2.setCedula("5343567");
-		ct2.setFechaNacimiento(LocalDateTime.of(1999, 3, 5, 0, 0));
+		Habitacion habi2 = new Habitacion();
+		habi2.setNumero("D435");
+		habi2.setPiso("1");
+		habi2.setTipo("Matrimonial");
+		habi2.setHotel(hote);
 		
-		//Pasaporte 2
-		Pasaporte p2 = new Pasaporte();
-		p2.setCiudadanoTurista(ct2);
-		p2.setNumero("1234");
-		p2.setFechaEmision(LocalDateTime.of(2016, 4, 6, 0, 0));
-		p2.setFechaCaducidad(LocalDateTime.of(2020, 3, 6, 0, 0));
-		
-		
-		
-		//Ciudadadano 3
-		CiudadanoTurista ct3 = new CiudadanoTurista();
-		ct2.setNombre("Lucia");
-		ct2.setApellido("Vasconez");
-		ct2.setCedula("534347");
-		ct2.setFechaNacimiento(LocalDateTime.of(1999, 4, 5, 0, 0));
-				
-		//Pasaporte 2
-		Pasaporte p3 = new Pasaporte();
-		p3.setCiudadanoTurista(ct3);
-		p3.setNumero("46575");
-		p3.setFechaEmision(LocalDateTime.of(2017, 4, 6, 0, 0));
-		p3.setFechaCaducidad(LocalDateTime.of(2019, 3, 6, 0, 0));
+		this.habitacionService.insertar(habi1);
+		this.habitacionService.insertar(habi2);
 		
 		//Insertar
 //		this.ciudadanoTuristaService.insertar(ct3);
@@ -99,7 +83,7 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 //		
 //		
 //		//Eliminar
-		this.ciudadanoTuristaService.eliminar(3);
+//		this.ciudadanoTuristaService.eliminar(3);
 		
 		
 		

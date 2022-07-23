@@ -6,18 +6,18 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.onetoone.Ciudadano;
+import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
 
 @Repository
 @Transactional
-public class CiudadanoRepositoryImpl implements ICiudadanoRepository{
+public class HotelRepositoryImpl implements IHotelRepository{
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
-	public void guardar(Ciudadano ciudadano) {
-		this.entityManager.persist(ciudadano);
+	public void insertar(Hotel hotel) {
+		this.entityManager.persist(hotel);
 		
 	}
 

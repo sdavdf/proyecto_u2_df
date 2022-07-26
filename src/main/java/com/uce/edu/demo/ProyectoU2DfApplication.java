@@ -1,19 +1,19 @@
 package com.uce.edu.demo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.libreria.repository.modelo.onetomany.Autor;
-import com.uce.edu.demo.libreria.repository.modelo.onetomany.Libro;
-import com.uce.edu.demo.libreria.service.IAutorService;
-import com.uce.edu.demo.libreria.service.ILibroService;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor1;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro1;
 import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
 import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
-import com.uce.edu.demo.service.IHabitacionService;
-import com.uce.edu.demo.service.IHotelService;
+import com.uce.edu.demo.service.ILibro1Service;
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
@@ -21,16 +21,7 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
 	@Autowired
-	private IAutorService iAutorService;
-
-	@Autowired
-	private ILibroService iLibroService;
-
-	@Autowired
-	private IHabitacionService habitacionService;
-
-	@Autowired
-	private IHotelService hotelService;
+	private ILibro1Service iLibro1Service;
 
 //	@Autowired
 //	private ICiudadanoTuristaService ciudadanoTuristaService;
@@ -52,6 +43,30 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
+		
+		Autor1 autor1 = new Autor1();
+		autor1.setNombre("Juan Perez2");
+		Set<Autor1> autores = new HashSet<>();
+		autores.add(autor1);
+		
+		// LIBRO 1
+		Libro1 lb1 = new Libro1();
+		lb1.setTitulo("World of war I");
+		lb1.setCantidadPaginas(100);
+		
+		lb1.setAutores(autores);
+		
+		this.iLibro1Service.insertar(lb1);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		Hotel h1 = new Hotel();
 //		h1.setNombre("Hilton Colon");
 //		h1.setDireccion("Av.Patria");
@@ -77,44 +92,44 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 //		this.habitacionService.insertar(habi2);
 
 		// AUTOR 1
-		Autor autor1 = new Autor();
-		autor1.setNombre("Julio");
-		autor1.setApellido("García");
-
-		Autor au1 = new Autor();
-		au1.setId(1);
-		
-		// AUTOR 2
-		Autor autor2 = new Autor();
-		autor2.setNombre("Antonio");
-		autor2.setApellido("Mendez");
-		
-		Autor au2 = new Autor();
-		au2.setId(2);
-
-		// LIBRO 1
-		Libro libr1 = new Libro();
-		libr1.setTitulo("World of war II");
-		libr1.setEditorial("Santillana");
-		libr1.setGenero("Historia");
-		libr1.setAutor(au1);
-		
-		Libro lb = new Libro();
-		lb.setId(1);
-		
-		// LIBRO 2
-		Libro libr2 = new Libro();
-		libr2.setTitulo("Harry Potter");
-		libr2.setEditorial("Parco");
-		libr2.setGenero("Fantasia");
-		libr2.setAutor(au1);
-		
-		// LIBRO 3
-		Libro libr3 = new Libro();
-		libr3.setTitulo("Crepúsculo");
-		libr3.setEditorial("Stephenie Meyer");
-		libr3.setGenero("Drama-Romance");
-		libr3.setAutor(au1);
+//		Autor autor1 = new Autor();
+//		autor1.setNombre("Julio");
+//		autor1.setApellido("García");
+//
+//		Autor au1 = new Autor();
+//		au1.setId(1);
+//		
+//		// AUTOR 2
+//		Autor autor2 = new Autor();
+//		autor2.setNombre("Antonio");
+//		autor2.setApellido("Mendez");
+//		
+//		Autor au2 = new Autor();
+//		au2.setId(2);
+//
+//		// LIBRO 1
+//		Libro libr1 = new Libro();
+//		libr1.setTitulo("World of war II");
+//		libr1.setEditorial("Santillana");
+//		libr1.setGenero("Historia");
+//		libr1.setAutor(au1);
+//		
+//		Libro lb = new Libro();
+//		lb.setId(1);
+//		
+//		// LIBRO 2
+//		Libro libr2 = new Libro();
+//		libr2.setTitulo("Harry Potter");
+//		libr2.setEditorial("Parco");
+//		libr2.setGenero("Fantasia");
+//		libr2.setAutor(au1);
+//		
+//		// LIBRO 3
+//		Libro libr3 = new Libro();
+//		libr3.setTitulo("Crepúsculo");
+//		libr3.setEditorial("Stephenie Meyer");
+//		libr3.setGenero("Drama-Romance");
+//		libr3.setAutor(au1);
 
 		// Insertar
 //		this.iLibroService.insertar(libr1);;
@@ -128,12 +143,12 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 		
 		
 		//Actualizar
-		libr2.setEditorial("Anstom");
+//		libr2.setEditorial("Anstom");
 //		this.iLibroService.actualizar(libr2);
 		
 		
 		//Eliminar
-		this.iLibroService.eliminar(3);
+//		this.iLibroService.eliminar(3);
 		
 		
 		

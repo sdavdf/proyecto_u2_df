@@ -1,7 +1,6 @@
 package com.uce.edu.demo;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.manytomany.Autor1;
-import com.uce.edu.demo.repository.modelo.manytomany.Libro1;
-import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
-import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
+import com.uce.edu.demo.cajero.repository.modelo.DetalleFactura;
+import com.uce.edu.demo.cajero.repository.modelo.Factura;
+import com.uce.edu.demo.cajero.service.IFacturaService;
 import com.uce.edu.demo.service.ILibro1Service;
 
 @SpringBootApplication
@@ -21,7 +19,10 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
 	@Autowired
-	private ILibro1Service iLibro1Service;
+	private IFacturaService facturaService;
+
+//	@Autowired
+//	private ILibro1Service iLibro1Service;
 
 //	@Autowired
 //	private ICiudadanoTuristaService ciudadanoTuristaService;
@@ -43,50 +44,38 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
+		Factura fact = this.facturaService.consultar(1);
 		
-		Autor1 autor1 = new Autor1();
-		autor1.setNombre("Juan Perez2");
-		Set<Autor1> autores = new HashSet<>();
-		autores.add(autor1);
+		log.info("Numero: " + fact.getNumero());
+		log.info("Fecha: " + fact.getFecha());
 		
-		// LIBRO 1
-		Libro1 lb1 = new Libro1();
-		lb1.setTitulo("World of war I");
-		lb1.setCantidadPaginas(100);
+		log.info("Cliente: " + fact.getCliente().getNumeroTarjeta());
 		
-		lb1.setAutores(autores);
-		
-		this.iLibro1Service.insertar(lb1);
+
+        List<DetalleFactura> detalles = fact.getDetalles();
+        for(DetalleFactura deta:detalles) {
+            log.info("Detalle: "+deta);
+        }
 		
 		
 		
 		
 		
 		
-		
-		
-		
-		
-//		Hotel h1 = new Hotel();
-//		h1.setNombre("Hilton Colon");
-//		h1.setDireccion("Av.Patria");
+
+//		Autor1 autor1 = new Autor1();
+//		autor1.setNombre("Juan Perez2");
+//		Set<Autor1> autores = new HashSet<>();
+//		autores.add(autor1);
 //		
-//		this.hotelService.insertar(h1);
-
-		Hotel hote = new Hotel();
-		hote.setId(1);
-
-		Habitacion habi1 = new Habitacion();
-		habi1.setNumero("A234");
-		habi1.setPiso("10");
-		habi1.setTipo("Familiar");
-		habi1.setHotel(hote);
-
-		Habitacion habi2 = new Habitacion();
-		habi2.setNumero("D435");
-		habi2.setPiso("1");
-		habi2.setTipo("Matrimonial");
-		habi2.setHotel(hote);
+//		// LIBRO 1
+//		Libro1 lb1 = new Libro1();
+//		lb1.setTitulo("World of war I");
+//		lb1.setCantidadPaginas(100);
+//		
+//		lb1.setAutores(autores);
+//		
+//		this.iLibro1Service.insertar(lb1);
 
 //		this.habitacionService.insertar(habi1);
 //		this.habitacionService.insertar(habi2);
@@ -136,25 +125,17 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 //		this.iLibroService.insertar(libr2);;
 //		this.iLibroService.insertar(libr3);;
 
-		
-		//Buscar
+		// Buscar
 //		this.iLibroService.buscar(1);
 //		this.iLibroService.buscar(2);
-		
-		
-		//Actualizar
+
+		// Actualizar
 //		libr2.setEditorial("Anstom");
 //		this.iLibroService.actualizar(libr2);
-		
-		
-		//Eliminar
+
+		// Eliminar
 //		this.iLibroService.eliminar(3);
-		
-		
-		
-		
-		
-		
+
 		// Insertar
 //		this.ciudadanoTuristaService.insertar(ct3);
 

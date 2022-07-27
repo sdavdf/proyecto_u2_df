@@ -1,17 +1,17 @@
 package com.uce.edu.demo;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.cajero.repository.modelo.DetalleFactura;
-import com.uce.edu.demo.cajero.repository.modelo.Factura;
-import com.uce.edu.demo.cajero.service.IFacturaService;
-import com.uce.edu.demo.service.ILibro1Service;
+import com.uce.edu.demo.deber24.repository.modelo.Autor1;
+import com.uce.edu.demo.deber24.repository.modelo.Libro1;
+import com.uce.edu.demo.deber24.service.IAutor1Service;
+import com.uce.edu.demo.deber24.service.ILibro1Service;
+import com.uce.edu.demo.deber24.service.ILibroAutorService;
+
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
@@ -19,7 +19,13 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
 	@Autowired
-	private IFacturaService facturaService;
+	private ILibro1Service iLibro1Service;
+
+	@Autowired
+	private IAutor1Service iAutor1Service;
+
+	@Autowired
+	private ILibroAutorService libroAutorService;
 
 //	@Autowired
 //	private ILibro1Service iLibro1Service;
@@ -44,18 +50,52 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Factura fact = this.facturaService.consultar(1);
-		
-		log.info("Numero: " + fact.getNumero());
-		log.info("Fecha: " + fact.getFecha());
-		
-		log.info("Cliente: " + fact.getCliente().getNumeroTarjeta());
-		
+		// 1 AUTOR CON 2 LIBROS
 
-        List<DetalleFactura> detalles = fact.getDetalles();
-        for(DetalleFactura deta:detalles) {
-            log.info("Detalle: "+deta);
-        }
+		Autor1 auto3 = new Autor1();
+		auto3.setNombre("Julio Garcia");
+
+		Libro1 libr2 = new Libro1();
+		libr2.setTitulo("World of war I");
+		libr2.setCantidadPaginas(1200);
+
+		Libro1 libr3 = new Libro1();
+		libr3.setTitulo("Cronicas de Narnia");
+		libr3.setCantidadPaginas(320);
+
+		this.iAutor1Service.insertar(auto3);
+		this.iLibro1Service.insertar(libr2);
+		this.iLibro1Service.insertar(libr3);
+
+		this.libroAutorService.insertar(auto3.getNombre(), libr2.getTitulo());
+		this.libroAutorService.insertar(auto3.getNombre(), libr3.getTitulo());
+		
+		
+		
+		// 1 LIBRO CON 2 AUTORES
+
+		Libro1 libr1 = new Libro1();
+		libr1.setTitulo("Harry Potter");
+		libr1.setCantidadPaginas(10000);
+
+		Autor1 auto1 = new Autor1();
+		auto1.setNombre("J.K. Rolling");
+
+		Autor1 auto2 = new Autor1();
+		auto2.setNombre("Antonio Mosquera");
+
+		this.iLibro1Service.insertar(libr1);
+		this.iAutor1Service.insertar(auto1);
+		this.iAutor1Service.insertar(auto2);
+
+		this.libroAutorService.insertar(auto1.getNombre(), libr1.getTitulo());
+		this.libroAutorService.insertar(auto2.getNombre(), libr1.getTitulo());
+
+	
+		
+		
+		
+		
 		
 		
 		

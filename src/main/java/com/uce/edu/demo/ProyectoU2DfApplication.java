@@ -1,17 +1,21 @@
 package com.uce.edu.demo;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.deber24.repository.modelo.Autor1;
-import com.uce.edu.demo.deber24.repository.modelo.Libro1;
-import com.uce.edu.demo.deber24.service.IAutor1Service;
-import com.uce.edu.demo.deber24.service.ILibro1Service;
-import com.uce.edu.demo.deber24.service.ILibroAutorService;
-
+import com.uce.edu.demo.prueba.repository.modelo.Matricula;
+import com.uce.edu.demo.prueba.repository.modelo.Propietario;
+import com.uce.edu.demo.prueba.repository.modelo.Vehiculo;
+import com.uce.edu.demo.prueba.service.IGestorMatriculaService;
+import com.uce.edu.demo.prueba.service.IPropietarioJpaService;
+import com.uce.edu.demo.prueba.service.IVehiculoJpaService;
 
 @SpringBootApplication
 public class ProyectoU2DfApplication implements CommandLineRunner {
@@ -19,20 +23,20 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	private static Logger log = Logger.getLogger(ProyectoU2DfApplication.class);
 
 	@Autowired
-	private ILibro1Service iLibro1Service;
+	private IGestorMatriculaService matriculaGestor;
 
 	@Autowired
-	private IAutor1Service iAutor1Service;
+	private IPropietarioJpaService propietarioService;
 
 	@Autowired
-	private ILibroAutorService libroAutorService;
+	private IVehiculoJpaService vehiculoService;
 
 //	@Autowired
-//	private ILibro1Service iLibro1Service;
-
+//	private IHotelService hotelService;
+//
 //	@Autowired
-//	private ICiudadanoTuristaService ciudadanoTuristaService;
-
+//	private IHabitacionService habitacionService;
+//	
 //	@Autowired
 //	private ICiudadanoService ciudadanoService;
 
@@ -49,59 +53,147 @@ public class ProyectoU2DfApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-//
+
+		//Insert de VEHICULO
+//		Vehiculo v1 = new Vehiculo();
+//		v1.setMarca("Mazda");
+//		v1.setPlaca("TYU-8908");
+//		v1.setTipo("Pesado");
+//		v1.setModelo("XSS");
+//		v1.setPrecio(new BigDecimal(34510));
+//		this.vehiculoService.insertar(v1);
+
+		// Insert de PROPIETARIO
+//		Propietario p1 = new Propietario();
+//		p1.setNombre("Juan");
+//		p1.setApellido("Velez");
+//		p1.setCedula("528468436");
+//		this.propietarioService.insertar(p1);
+		
+		
+//		List<Matricula> matriculas=new ArrayList();
+//		
+//		p1.setMatriculas(null);
+//		
+
+		this.matriculaGestor.matricularVehiculo("528468436", "TYU-8908");
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// ONE TO ONE ---Empleado-Ciudadano
+
+		// Tabla secundaria primero(Ciudadano)
+//		Ciudadano ciu1 = new Ciudadano();
+//		ciu1.setNombre("Stalyn");
+//		ciu1.setApellido("Lopez");
+//		
+//		//Tabla principal(Empleado)
+//		Empleado empl1 = new Empleado();
+//		empl1.setCodigoIess("r43853j");
+//		empl1.setSalario(new BigDecimal(100));
+//		empl1.setCiudadano(ciu1);
+//		
+//		ciu1.setEmpleado(empl1);
+//		
+//		this.ciudadanoService.guardar(ciu1);
+
+		////////////////////////////////////////////////////////////////////////////////////////////
+
+		// ONE TO MANY ---Hotel-Habitacion
+
+		// Primero se debe ingresar el elemento de la entidad principal
+
+//		Hotel h1 = new Hotel();
+//		//h1.setId(4);
+//		h1.setNombre("Hotel dos");
+//		h1.setDireccion("Junin y Uruguay");
+//			
+//		this.hotelService.insertar(h1);
+
+		// Buscamos el hotel para asignarle la habitacion
+//		Hotel hote = new Hotel();
+//		hote.setId(3);
+//		
+//		
+//		Habitacion habi1 = new Habitacion();
+//		habi1.setNumero("431");
+//		habi1.setPiso("34");
+//		habi1.setTipo("Familiar");
+//		habi1.setHotel(hote);
+//		
+//		this.habitacionService.insertar(habi1);
+
 		// 1 AUTOR CON 2 LIBROS
 
-		Autor1 auto3 = new Autor1();
-		auto3.setNombre("Julio Garcia");
-
-		Libro1 libr2 = new Libro1();
-		libr2.setTitulo("World of war I");
-		libr2.setCantidadPaginas(1200);
-
-		Libro1 libr3 = new Libro1();
-		libr3.setTitulo("Cronicas de Narnia");
-		libr3.setCantidadPaginas(320);
-
-		this.iAutor1Service.insertar(auto3);
-		this.iLibro1Service.insertar(libr2);
-		this.iLibro1Service.insertar(libr3);
-
-		this.libroAutorService.insertar(auto3.getNombre(), libr2.getTitulo());
-		this.libroAutorService.insertar(auto3.getNombre(), libr3.getTitulo());
-		
-		
-		
-		// 1 LIBRO CON 2 AUTORES
-
-		Libro1 libr1 = new Libro1();
-		libr1.setTitulo("Harry Potter");
-		libr1.setCantidadPaginas(10000);
-
-		Autor1 auto1 = new Autor1();
-		auto1.setNombre("J.K. Rolling");
-
-		Autor1 auto2 = new Autor1();
-		auto2.setNombre("Antonio Mosquera");
-
-		this.iLibro1Service.insertar(libr1);
-		this.iAutor1Service.insertar(auto1);
-		this.iAutor1Service.insertar(auto2);
-
-		this.libroAutorService.insertar(auto1.getNombre(), libr1.getTitulo());
-		this.libroAutorService.insertar(auto2.getNombre(), libr1.getTitulo());
-
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+//		Autor1 auto3 = new Autor1();
+//		auto3.setNombre("Julio Garcia");
+//
+//		Libro1 libr2 = new Libro1();
+//		libr2.setTitulo("World of war I");
+//		libr2.setCantidadPaginas(1200);
+//
+//		Libro1 libr3 = new Libro1();
+//		libr3.setTitulo("Cronicas de Narnia");
+//		libr3.setCantidadPaginas(320);
+//
+//		this.iAutor1Service.insertar(auto3);
+//		this.iLibro1Service.insertar(libr2);
+//		this.iLibro1Service.insertar(libr3);
+//
+//		this.libroAutorService.insertar(auto3.getNombre(), libr2.getTitulo());
+//		this.libroAutorService.insertar(auto3.getNombre(), libr3.getTitulo());
+//		
+//		
+//		
+//		// 1 LIBRO CON 2 AUTORES
+//
+//		Libro1 libr1 = new Libro1();
+//		libr1.setTitulo("Harry Potter");
+//		libr1.setCantidadPaginas(10000);
+//
+//		Autor1 auto1 = new Autor1();
+//		auto1.setNombre("J.K. Rolling");
+//
+//		Autor1 auto2 = new Autor1();
+//		auto2.setNombre("Antonio Mosquera");
+//
+//		this.iLibro1Service.insertar(libr1);
+//		this.iAutor1Service.insertar(auto1);
+//		this.iAutor1Service.insertar(auto2);
+//
+//		this.libroAutorService.insertar(auto1.getNombre(), libr1.getTitulo());
+//		this.libroAutorService.insertar(auto2.getNombre(), libr1.getTitulo());
 
 //		Autor1 autor1 = new Autor1();
 //		autor1.setNombre("Juan Perez2");

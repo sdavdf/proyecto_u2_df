@@ -7,54 +7,55 @@ import java.time.LocalDateTime;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+import com.uce.edu.demo.prueba.repositorry.IMatriculaJpaRepository;
+import com.uce.edu.demo.prueba.repositorry.IPropietarioJpaRepository;
+import com.uce.edu.demo.prueba.repositorry.IVehiculoJpaRepository;
 import com.uce.edu.demo.prueba.repository.modelo.Matricula;
 import com.uce.edu.demo.prueba.repository.modelo.Propietario;
 import com.uce.edu.demo.prueba.repository.modelo.Vehiculo;
 
+@Service
 public class GestorMatriculaServiceImpl implements IGestorMatriculaService{
 	
 	private static Logger LOG = Logger.getLogger(GestorMatriculaServiceImpl.class);
 
 	@Autowired
-	private IPropietarioJpaService iPropietarioJpaService;
-
+	private IPropietarioJpaRepository propietarioJpaRepository;
 	@Autowired
-	private IVehiculoJpaService iVehiculoJpaService;
-
-	@Autowired
-	private IMatriculaJpaService iMatriculaJpaService;
-
-	@Autowired
-	@Qualifier("liviano")
-	private IMatriculaVehicularService vehiL;
-
+	private IVehiculoJpaRepository vehiculoJpaRepository;
+	
 	@Autowired
 	@Qualifier("pesado")
-	private IMatriculaVehicularService vehiP;
+	private IMatriculaVehicularService matriculaPesadoService;
+	
+	@Autowired
+	@Qualifier("liviano")
+	private IMatriculaVehicularService matriculaLivianoService;
+	
+	@Autowired
+	private IMatriculaJpaRepository matriculaRepository;
 	
 	@Override
 	public void matricularVehiculo(String cedulaPropietario, String placaVehiculo) {
 	
 
-		Vehiculo v = this.iVehiculoJpaService.buscar(placaVehiculo);
-		Propietario p = this.iPropietarioJpaService.buscar(cedulaPropietario);
+		Vehiculo v = this.vehiculoJpaRepository.buscar(placaVehiculo);
+		Propietario p = this.propietarioJpaRepository.buscar(cedulaPropietario);
 
 		LOG.info("Vehiculo encontrado para setear en la matricula: " + v.toString());
 		LOG.info("Propietario encontrado para setear en la matricula: " + p.toString());
 
-		Matricula m = new Matricula();
-		m.setFechaMatricula(LocalDateTime.now());
-		// m.setPropietario(null);//le envio null porque tofavia no vemos las relaciones
-		// entre tablas
+		String tipo=v.getTipo();
 		BigDecimal valMatricula = null;
 		
 		
 
 		if (v.getTipo().equals("L")) {
-			valMatricula = this.vehiL.calcularDescuento(v.getPrecio());
+			valMatricula = this.matriculaLivianoService.calcularDescuento(v.getPrecio());
 		} else if (v.getTipo().equals("P")) {
-			valMatricula = this.vehiP.calcularDescuento(v.getPrecio());
+			valMatricula = this.matriculaPesadoService.calcularDescuento(v.getPrecio());
 		}
 
 		if (valMatricula.compareTo(new BigDecimal(2000)) > 0) {
@@ -63,11 +64,14 @@ public class GestorMatriculaServiceImpl implements IGestorMatriculaService{
 			valMatricula = valMatricula.subtract(valDescuento);
 		}
 
-		m.setValorMatrciula(valMatricula.setScale(2, RoundingMode.HALF_UP));
-		// m.setVehiculo(null); //le envio null porque todavia no vemos relaciones entre
-		// tablas
+		Matricula m =new Matricula();
+		m.setFechaMatricula(LocalDateTime.now());
+		m.setValorMatrciula(valMatricula);
+		m.setPropietario(p);
+		m.setVehiculo(v);
 
-		this.iMatriculaJpaService.insertar(m);;
+
+		this.matriculaRepository.insertar(m);
 
 	
 		
